@@ -65,14 +65,16 @@ def show_calendar():
             else:
                 check_date = date(2026, 10, day)
 
-                #この日に支出が1件でもあるか
-                has_expense = any(
-                    expense[0] == check_date
-                    for expense in expenses
-                )
+                total = 0
+
+                for expense in expenses:
+                    if expense[0] == check_date:
+                        total += expense[1]
+
+                has_expense = total > 0
 
                 if has_expense:
-                    text = f"{day}●"
+                    text = f"{day}\n￥{total}"
                 else:
                     text = str(day)
 
