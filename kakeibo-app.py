@@ -4,7 +4,7 @@ import calendar
 
 window = tk.Tk()
 window.title("家計簿アプリ")
-window.geometry("400x500")
+window.geometry("400x800")
 
 calendar_frame = tk.Frame(window)
 calendar_frame.pack()
@@ -26,6 +26,8 @@ def select_date(day):
 
     show_selected_expenses()
 
+    show_calendar()
+
 
 #選択した日付の支出一覧を表示する関数
 def show_selected_expenses():
@@ -38,6 +40,16 @@ def show_selected_expenses():
 
 #カレンダーを表示する関数
 def show_calendar():
+    weekdays = ["日","月","火","水","木","金","土"]
+
+    for col, weekday in enumerate(weekdays):
+        label = tk.Label(
+            calendar_frame,
+            text = weekday,
+            width = 4
+        )
+        label.grid(row = 0, column = col)
+
     year = 2026
     month = 10
 
@@ -67,10 +79,13 @@ def show_calendar():
                 button = tk.Button(
                     calendar_frame,
                     text = text,
+                    width = 5,
+                    height = 2,
+                    bg = "lightblue" if selected_date == date(year, month, day) else "white",
                     command = lambda d = day: select_date(d)
                     )
 
-            button.grid(row = row, column = col)
+            button.grid(row = row + 1, column = col)
             
 
 label = tk.Label(window, text = "====== 家計簿 =====")
@@ -94,7 +109,7 @@ memo_label.pack()
 memo_entry = tk.Entry(window)
 memo_entry.pack()
 
-expenses_list  = tk.Listbox(window)
+expenses_list  = tk.Listbox(window, width = 30, height = 10)
 expenses_list.pack()
 
 #支出を登録する関数
