@@ -6,6 +6,18 @@ window = tk.Tk()
 window.title("家計簿アプリ")
 window.geometry("400x800")
 
+month_frame = tk.Frame(window)
+month_frame.pack()
+
+prev_button = tk.Button(month_frame, text = "◀ 前月")
+prev_button.pack(side = "left")
+
+month_label = tk.Label(month_frame, text = "2026年10月", width = 12)
+month_label.pack(side = "left")
+
+next_button = tk.Button(month_frame, text = "次月 ▶")
+next_button.pack(side = "left")
+
 calendar_frame = tk.Frame(window)
 calendar_frame.pack()
 
@@ -38,6 +50,25 @@ def show_selected_expenses():
             expenses_list.insert(tk.END, expense)
             
 
+current_year = 2026
+current_month = 10
+
+def change_month(diff):
+    global current_year, current_month
+
+    current_month += diff
+
+    if current_month > 12:
+        current_month = 1
+        current_year += 1
+    elif current_month < 1:
+        current_month = 12
+        current_year -= 1
+
+    month_label.config(text = f"{current_year}年{current_month}月")
+    
+    show_calendar()
+
 #カレンダーを表示する関数
 def show_calendar():
     weekdays = ["日","月","火","水","木","金","土"]
@@ -63,7 +94,7 @@ def show_calendar():
             if day == 0:
                 button = tk.Button(calendar_frame, text = "")   #存在しない日(0日)は空白にする
             else:
-                check_date = date(2026, 10, day)
+                check_date = date(year, month, day)
 
                 total = 0
 
