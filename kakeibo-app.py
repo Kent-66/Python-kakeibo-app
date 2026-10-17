@@ -9,13 +9,13 @@ window.geometry("400x800")
 month_frame = tk.Frame(window)
 month_frame.pack()
 
-prev_button = tk.Button(month_frame, text = "◀ 前月")
+prev_button = tk.Button(month_frame, text = "◀ 前月", command = lambda: change_month(-1))
 prev_button.pack(side = "left")
 
 month_label = tk.Label(month_frame, text = "2026年10月", width = 12)
 month_label.pack(side = "left")
 
-next_button = tk.Button(month_frame, text = "次月 ▶")
+next_button = tk.Button(month_frame, text = "次月 ▶", command = lambda: change_month(1))
 next_button.pack(side = "left")
 
 calendar_frame = tk.Frame(window)
@@ -27,12 +27,20 @@ selected_date_label.pack()
 expenses = []
 selected_date = None
 
+current_year = 2026
+current_month = 10
+
 
 #日付を選択する関数
 def select_date(day):
     global selected_date
+    global current_year
+    global current_month
 
-    selected_date = date(2026, 10, day)
+    year = current_year
+    month = current_month
+
+    selected_date = date(year, month, day)
 
     selected_date_label.config(text = f"選択した日付：{day}日")
 
@@ -48,10 +56,8 @@ def show_selected_expenses():
     for expense in expenses:
         if expense[0] == selected_date:
             expenses_list.insert(tk.END, expense)
-            
 
-current_year = 2026
-current_month = 10
+            
 
 def change_month(diff):
     global current_year, current_month
@@ -81,8 +87,8 @@ def show_calendar():
         )
         label.grid(row = 0, column = col)
 
-    year = 2026
-    month = 10
+    year = current_year
+    month = current_month
 
     calendar.setfirstweekday(calendar.SUNDAY)
 
@@ -92,7 +98,7 @@ def show_calendar():
         for col, day in enumerate(week):
             
             if day == 0:
-                button = tk.Button(calendar_frame, text = "")   #存在しない日(0日)は空白にする
+                button = tk.Label(calendar_frame, text = "", width = 5, height = 2)   #存在しない日(0日)は空白にする
             else:
                 check_date = date(year, month, day)
 
