@@ -4,7 +4,7 @@ Tkinter Kakeibo App
 ## 概要
 PythonのGUIライブラリであるTkinterを使って作成した家計簿アプリです。　　
 支出の登録・一覧表示・合計金額の確認など、日々の家計管理を簡単に行えるように設計しています。　　
-学習目的で作成しており、○○の理解を深めることを目的としています。
+学習目的で作成しており、Tkinterを使ったGUIレイアウトの基礎やPythonの基本文法、関数、制御構文などの理解を深めることを目的としています。
 
 ## 主な機能
 ・支出の記録  
@@ -18,7 +18,7 @@ PythonのGUIライブラリであるTkinterを使って作成した家計簿ア�
 ・Tkinter  
 
 ## 実行方法
-1.リポジトリをクローンする
+1.リポジトリをクローンする  
 GitHubからソースコードをダウンロードします。
 
 git clone https://github.com/Kent-66/Python-kakeibo-app.git
@@ -27,12 +27,15 @@ git clone https://github.com/Kent-66/Python-kakeibo-app.git
 
 cd Python-kakeibo-app
 
-3.アプリを起動する
+3.アプリを起動する  
 Python3.14がインストールされていることを確認し、以下のコマンドを実行します。
 
 kakeibo-app.py
 
 ## ディレクトリ構成
+Python-kakeibo-app
+└── kakeibo-app.py
+└── README.md
 
 ## 開発目的
 Pythonの学習を目的として、実際に使えるアプリケーションの開発に取り組みました。  
